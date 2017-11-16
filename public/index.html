@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <style>
+        .login {
+            width: 400px;
+            padding: 10px;
+        }
+
+      
+
+        .btn-default-color {
+            background: #757575;
+            color: #fff;
+            border: 0px;
+        }
+
+        @media all and (max-width: 400px) {
+
+.login-header{
+    height: 100px;
+}
+
+            .login {
+                width: 100%
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="jumbotron text-center" style="background:#009688; border-radius:0px; color:#FFFFFF">
+        <h1>My First Bootstrap Page</h1>
+        <p>Resize this responsive page to see the effect!</p>
+    </div>
+
+
+    <div class="container">
+
+
+        <div class="login">
+            <div class="alert ">
+
+                <div class="row">
+                    <div class="col-3">
+                        <label>Username:</label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" type="text">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-3">
+                        <label>Password:</label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" type="password">
+                    </div>
+                </div>
+
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <input type="button" class="btn btn-md btn-primary btn-default-color" value="login">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

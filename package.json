@@ -10,8 +10,21 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "connect-flash": "*",
+    "cookie-parser": "*",
     "express": "^4.16.2",
-    "mongodb": "^2.2.33"
+    "express-messages": "",
+    "express-session": "^1.15.6",
+    "express-validator": "",
+    "jade": "*",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.13.3",
+    "morgan": "*",
+    "multer": "*",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "serve-favicon": "*"
   },
   "port": "8012",
   "mongoConnectioString": "mongodb://127.0.0.1:27017/loginapp",
