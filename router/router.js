@@ -1,10 +1,10 @@
 var express = require('express');
-
+var packagejson = require("../package.json");
 var MongoClient = require('mongodb');
 
 var routerApp = express.Router();
 
-const url = "mongodb://127.0.0.1:27017/loginapp";
+const url = packagejson.mongoConnectioString;
 
 routerApp.post('/login', (req, res) => {
 
@@ -12,9 +12,9 @@ routerApp.post('/login', (req, res) => {
         .then(data => {
             if (data.length > 0) {
                 res.json(data);
-                console.log(data);
+
             } else {
-                console.log(data);
+
                 res.json({ status: 404 });
 
             }
@@ -54,10 +54,6 @@ function queryMongo_Single(query, collectionName) {
         });
 
     })
-
-
-
-
 
     return result;
 
