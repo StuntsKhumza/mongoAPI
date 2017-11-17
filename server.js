@@ -22,7 +22,29 @@ app.use(session(
         saveUninitialized:true,
         resave: true
     }
-))
+));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+//validate
+app.use(expressValidator({
+    errorFormatter: (param, msg,value)=>{
+        var namespace = param.split("."),
+        root = namespace.shitf(),
+        formParam = root;
+
+        while(namespace.length){
+            formParam += '[' + namespace.shift() + ']';
+        }
+
+        return {
+            param : formParam,
+            msg: msg,
+            value: value
+        }
+    }
+}));
 
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
