@@ -1,32 +1,6 @@
-angular.module('app', []).
-controller('contr', ($scope, $http) => {
-    $scope.users = {
-        username: '',
-        password: ''
-    }
+angular.module('main-app', ['ui.router', 'login-app', 'profiles-app','session-app'])//['landing-app', 'search-app'])
+        .config(function ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise('/login');
+        })
 
-    $scope.submit = () => {
-
-        $http.post('/login', $scope.users)
-            .then((response) => {
-                console.log($scope.users);
-                if (response.data.status == 200){
-
-                    console.log("success");
-
-                }
-                else {
-                    console.log(response);
-                }
-                
-
-            },
-           (response) => {
-                console.log(response);
-
-
-            })
-
-
-    }
-})
+//

@@ -1,0 +1,32 @@
+.remove-radius { border-radius: 0px; }
+.border-left-green-md { border-left: 5px solid #4ca94f; }
+.add-padding-left-md { padding-left: 15px; }
+.add-padding-all {padding: 10px;}
+.add-padding-all-min {padding: 20px;}
+.add-margin-all { margin: 5px; }
+.btn-c-white {background: #fff; border: 0px;}
+.btn-c-success {background-color:#fff; color: #212121;border: 0px;border-bottom:#4ca94f 2px solid;  }
+.btn-c-success:hover {background-color: #4ca94f; color: #fff;}
+.panel{padding: 5px;}
+.panel.panel-default {background-color: #d83b01; color: #fff;}
+.c-pull-right {
+    float: right;
+}
+.border-add-left{
+    border-left: 1px solid #ccc;
+}
+
+.border-add-right{
+    border-right: 1px solid #ccc;
+}
+
+.background-color-dark{
+    background-color: #3A4149;
+    color:#D3D5CB;
+}
+
+.add-margin-sm {
+    margin: 3px;
+}
+
+.ngRadiosBtns ul > li{list-style: none;}

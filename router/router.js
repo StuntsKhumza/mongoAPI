@@ -42,14 +42,14 @@ routerApp.post('/login', (req, res) => {
                     });
                 } else {
                     res.json({
-                        status: 403
+                        status: 403,message:'please check username/password'
                     });
                 }
 
 
             } else {
 
-                res.json({ status: 404 });
+                res.json({ status: 404 , message:'User (' +req.body.username + ') does not exist'});
 
             }
         })

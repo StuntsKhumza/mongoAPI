@@ -1,0 +1,152 @@
+<style>
+    .table th {
+        border-top: 0px;
+    }
+
+    .row-data {
+
+        margin: 3px;
+    }
+
+
+    .dspQueue {
+        padding: 4px;
+        border-radius: 5px;
+    }
+
+    @media all and (max-width: 400px) {
+        #btnQueue {
+            width: 100%;
+        }
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<div class="container">
+
+    <div class="search-container">
+
+        <div class="row">
+
+
+            <div class="col-12">
+
+                <div class="pull-right">
+
+                    <input type="button" id="btnQueue" ng-if="false" data-toggle="modal" data-target="#queueModal" value="Queue" class="btn btn-default">
+                </div>
+                <br><br>
+
+                <div class="search-header">
+                    <h3>Search for a patient:</h3>
+                    <hr class="colorgraph"><br>
+                </div>
+                <div class="search-body">
+                    <div class="row" ng-if="false">
+                        <div class="col-12">
+                            <img src="img/Searching.gif" alt="searching gif"><br>
+                            <h4>...please wait</h4>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row" ng-if="!searchCtr.search_complete" >
+                            <div class="col">
+                                    <div class="alert alert-danger" ng-show="searchCtr.showmsg.length > 0">{{searchCtr.showmsg}}</div>
+                            </div>
+                        </div>
+                        <div class="row " ng-if="!searchCtr.search_complete">
+                            
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="">
+                                            <label class="search-body-lable">File Number:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" placeholder="file number" ng-disabled="searchCtr.searchObj.id_number.length > 0" class="form-control simplebox remove-radius"
+                                            ng-model="searchCtr.searchObj.file_number" ng-keyup="searchCtr.search_key($event)"
+                                            name="search_cardNo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="">
+                                            <label class="search-body-lable">ID Number:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" placeholder="id number" onkeypress="return isNumberKey(event)" ng-disabled="searchCtr.searchObj.file_number.length > 0"
+                                            class="form-control simplebox remove-radius" ng-model="searchCtr.searchObj.id_number"
+                                            ng-keyup="searchCtr.search_key($event)" name="search_IDNo">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="alert alert-success" name="searchResult" ng-show="searchCtr.showmsg2.length > 0">{{searchCtr.showmsg2}}
+
+                                </div>
+
+                                <br>
+
+                                <input type="button" ng-if="!searching && !searchCtr.search_complete" value="Search" class="btn btn-md btn-c-primary pull-right"
+                                    ng-click="search()" id="search_client">
+                                <img src="img/Searching.gif" class="pull-right" ng-if="searching" alt="searching gif">
+                                <input type="button" ng-if="searchCtr.search_complete" value="Clear Search" class="btn btn-md btn-danger pull-right" ng-click="searchCtr.clear_search()"
+                                    id="clear_search">
+
+                                <br><br>
+                            </div>
+                        </div>
+                        <hr>
+                        <p>
+                            <h5>Search history: </h5>
+                        </p>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Card #</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-hover">
+                                        <tr ng-repeat="result in results">
+                                            <td class="row-data-td">{{1 + $index}}</td>
+                                            <td>{{result.PATIENTNAME + " " + result.PATIENTSURNAME}}</td>
+                                            <td>{{result.PATIENTCARDNUMBER}}</td>
+                                            <td>
+                                                <input type="button" ng-disabled="!profilesController.access.admin" ng-if="false" value="open" class="btn btn-md btn-c-success" ng-click="setClient(result.PATIENTID)"
+                                                    name="{{'btnOpen_' + $index}}">
+                                                <input type="button" value="queue" class="btn btn-md btn-c-success" ng-click="searchCtr.addToQue(result)" >
+                                                <!--  <input type="button" value="queue" class="btn btn-md btn-c-success" ng-click="searchCtr.addToQue(result.ID)" data-toggle="modal" data-target="#openQueModal">-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="search-footer">
+                            <div class="queue-body">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+

@@ -1,0 +1,1 @@
+server := @ReplaceSubstring(@If( @Name([Abbreviate]; @Subset(@DbName; 1))='';@Name([Abbreviate]; @ServerName);@Name([Abbreviate]; @Subset(@DbName; 1)));'\';'/');@ifError(@DbLookup('':'Nocache';server:'KeywordRep.nsf';'ActiveTogglesByServerByDatabaseLookup';server ;2); '')

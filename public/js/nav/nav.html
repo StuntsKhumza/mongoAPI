@@ -1,0 +1,43 @@
+<div class="topnav-toggle">
+    <button type="button" class="topnav-toggle" onclick="showNav()" data-toggle="collapse" data-target="#myNavbar">
+      =
+        <span class="icon-bar"></span> 
+      </button>
+</div>
+<div class="topnav" id="myTopnav">
+    <input type="button" value="Home"ng-class="{'active':bttsetting.active=='HOME'}" ng-click="navCtr.goHome()">
+    <input type="button" value="Bookings" ng-click="navCtr.openBookings()" ng-hide="bttsetting.hide.bookings">
+    <input type="button" value="Add Patient" ng-if="roles.reception || roles.admin" ng-click="navCtr.addPatient()" ng-class="{'active':bttsetting.active=='ADDPATIENT'}">
+
+    <div class="topNavRight">
+     
+        <button style="height: 100%; background-color: #212121" ng-if="!navCtr.spinner"><i class="fa fa-user" aria-hidden="true"></i> {{navCtr.userName}}</button>
+        
+        <button style="height: 100%;" ng-if="navCtr.spinner"><img src="img/spinner.gif" alt="spinner" ></button>
+      
+        <input type="button" ng-if="(roles.reception || roles.admin) && !bttsetting.hide.queu"  value="Queue" class="" onclick="openNav()">
+        <input type="button" value="Log out" ng-click="navCtr.logOff()">
+
+    </div>
+</div>
+
+
+
+<div id="appsSidenav" class="apps" ng-show="false">
+
+  <button  ng-click="navCtr.goHome()" ng-class="{'apps-button-active':bttsetting.active=='HOME'}" data-toggle="tooltip" data-placement="left" title="Home"><i class="fa fa-home" aria-hidden="true"></i></button><br>
+  <button ng-click="navCtr.openBookings()" data-toggle="tooltip" data-placement="left" title="Open Bookings"><i class="fa fa-book" aria-hidden="true"></i></button><br>
+  <button ng-click="navCtr.addPatient()" ng-if="roles.reception || roles.admin" ng-click="navCtr.addPatient()" ng-class="{'apps-button-active':bttsetting.active=='ADDPATIENT'}" data-toggle="tooltip" data-placement="left" title="Capture New Patient"><i class="fa fa-plus-circle" aria-hidden="true"></i></button><br>
+  <button ng-if="(roles.reception || roles.admin) && !bttsetting.hide.queu"  onclick="openNav()" ng-if="(roles.reception || roles.admin) && !bttsetting.hide.queu" data-toggle="tooltip" data-placement="left" title="Open waiting list"><i class="fa fa-list" aria-hidden="true"></i></button>
+  <div style="bottom:0; position:absolute; border-top:1px #212121 solid">
+    <button data-toggle="tooltip" data-placement="left" title="{{navCtr.userName}}"><i class="fa fa-user" aria-hidden="true"></i></button><br>
+    <button ng-click="navCtr.logOff()" data-toggle="tooltip" data-placement="left" title="Logoff"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+  </div>
+
+</div>
+
+<script>
+    $(function () {
+//$('[data-toggle="tooltip"]').tooltip()
+})
+</script>
