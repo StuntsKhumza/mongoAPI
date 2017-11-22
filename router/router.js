@@ -15,13 +15,9 @@ const url = packagejson.mongoConnectioString;
 /*GET USER LOGIN*/
 routerApp.post('/login', (req, res) => {
 
-
-
     var userLoginData = {
         username: req.body.username
-    }
-
-    console.log(userLoginData);
+    }   
 
     userQuery.getLogin(userLoginData)
 
