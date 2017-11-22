@@ -5,7 +5,8 @@ var userQuery = require('../mongo/users_query');
 var encrypt = require('../utils/bcrypt');
 var _ = require('lodash');
 var bcrypt = require('bcryptjs');
-
+var session = require("express-session");
+var sess ;// req.session;
 var salt = bcrypt.genSaltSync(10);
 
 var routerApp = express.Router();
@@ -31,6 +32,7 @@ routerApp.post('/login', (req, res) => {
 
                 if (passwordCheck) {
                     usrObj.password = null;
+                    sess.loggedIn = true;
                     res.json({
                         status: 200, userdata: usrObj
                     });

@@ -13,7 +13,7 @@ var multer = require("multer");
 var flash = require("connect-flash");
 var mongoose = require("mongoose");
 var expressValidator = require('express-validator');
-
+var session_variable;
 app.use(bodyParser.json())
 app.use(express.static('public'));
 var upload = multer({dest:'./uploads'});
