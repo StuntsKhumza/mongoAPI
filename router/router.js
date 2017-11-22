@@ -6,12 +6,16 @@ var encrypt = require('../utils/bcrypt');
 var _ = require('lodash');
 var bcrypt = require('bcryptjs');
 var session = require("express-session");
-var sess ;// req.session;
+var sess = {};// req.session;
 var salt = bcrypt.genSaltSync(10);
 
 var routerApp = express.Router();
 
 const url = packagejson.mongoConnectioString;
+
+routerApp.get('/check', (req,res)=>{
+    res.send(sess);
+})
 
 /*GET USER LOGIN*/
 routerApp.post('/login', (req, res) => {
