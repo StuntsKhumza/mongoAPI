@@ -1,17 +1,49 @@
 var express = require('express');
 var packagejson = require("../package.json");
-var MongoClient = require('mongodb');
+var mongoose = require('mongoose');
+var userQuery = require('../mongo/users_query');
+var encrypt = require('../utils/bcrypt');
+var _ = require('lodash');
+var bcrypt = require('bcryptjs');
+
+var salt = bcrypt.genSaltSync(10);
 
 var routerApp = express.Router();
 
 const url = packagejson.mongoConnectioString;
 
+/*GET USER LOGIN*/
 routerApp.post('/login', (req, res) => {
 
-    queryMongo_Single(req.body, "users")
+
+
+    var userLoginData = {
+        username: req.body.username
+    }
+
+    console.log(userLoginData);
+
+    userQuery.getLogin(userLoginData)
+
         .then(data => {
+
             if (data.length > 0) {
-                res.json(data);
+
+                var usrObj = data[0];
+
+                var passwordCheck = bcrypt.compareSync(req.body.password, usrObj.password);
+
+                if (passwordCheck) {
+                    usrObj.password = null;
+                    res.json({
+                        status: 200, userdata: usrObj
+                    });
+                } else {
+                    res.json({
+                        status: 403
+                    });
+                }
+
 
             } else {
 
@@ -22,42 +54,37 @@ routerApp.post('/login', (req, res) => {
 
 })
 
-routerApp.get('/log', (req, res) => {
+/*ADD USER LOGIN*/
 
-    res.send("worked");
+routerApp.post('/addLogin', (req, res) => {
 
-})
+    var userData = req.body;
 
-//query mongo
-function queryMongo_Single(query, collectionName) {
+    var hash = bcrypt.hashSync(userData.password, 10);
 
-    return new Promise((resolve, reject) => {
 
-        MongoClient.connect(url, (err, db) => {
+    userData.password = hash;
 
-            if (err) {
+    userQuery.addLogin(userData)
 
-                reject(err);
+        .then(data => {
+
+            if (!_.isEmpty(data)) {
+
+
+                res.json({
+                    status: 200,
+                    message: 'Added successfully'
+                });
 
             } else {
 
-                db.collection(collectionName).find(query).toArray(function (err, result) {
+                res.json({ status: 404 });
 
-                    if (err) throw err;
-
-                    db.close();
-
-                    resolve(result);
-
-                });
             }
-        });
+        })
 
-    })
-
-    return result;
-
-}
+})
 
 
 module.exports = routerApp;
