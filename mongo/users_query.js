@@ -26,7 +26,7 @@ module.exports = {
     addLogin: function (data) {
 
         return new Promise((resolve, reject) => {
-
+            console.log(data);
             users.create(data, (err,post) => {
 
                 if (err) {

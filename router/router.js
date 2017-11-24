@@ -63,10 +63,9 @@ routerApp.post('/addLogin', (req, res) => {
 
     var userData = req.body;
 
-    var hash = bcrypt.hashSync(userData.password, 10);
+    var hash = bcrypt.hashSync(userData.PASSWORD, 10);
 
-
-    userData.password = hash;
+    userData.PASSWORD = hash;
 
     userQuery.addLogin(userData)
 

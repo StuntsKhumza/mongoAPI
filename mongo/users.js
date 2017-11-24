@@ -10,13 +10,13 @@ mongoose.connect(url, {useMongoClient: true});
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    id:Number,
-    username: String,
-    password: String,
-    surname: String,
-    type: String,
-    speciality: String,
-    name: String
+    ID:{type: Number, required: true},
+    USERNAME: String,
+    PASSWORD: String,
+    SURNAME: String,
+    TYPE: String,
+    SPECIALITY: String,
+    NAME: String
 })
 
 var users = mongoose.model('users', userSchema);
