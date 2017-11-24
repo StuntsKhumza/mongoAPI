@@ -62,7 +62,9 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 //app.use('/', express.static(__dirname + '/www')); // redirect root
 app.post('/login', router);
 app.get('/check', router);
+app.get('/getSession', router);
 app.post('/addLogin', router);
+
 app.listen(packagejson.port, ()=>{
     console.log('Server up on http://localhost:' + packagejson.port);
 })

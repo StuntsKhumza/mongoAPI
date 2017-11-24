@@ -1,7 +1,7 @@
 angular.module('session-app', ['ngCookies'])
     .service('serviceSession', function ($http, $cookies) {
 
-       // this.uploadUrl = "php/service_secured.php";
+        // this.uploadUrl = "php/service_secured.php";
         this.restendpoint = "/";
         this.roles = "";
 
@@ -48,7 +48,7 @@ angular.module('session-app', ['ngCookies'])
 
         }
 
-        this.callRest = function (data, action) {
+        this.POST = function (data, action) {
 
             return $http.post(this.restendpoint + action, data).
 
@@ -57,6 +57,19 @@ angular.module('session-app', ['ngCookies'])
                     return res.data;
 
                 })
+
+
+        }
+
+        this.GET = function (data, action) {
+
+            return $http({
+                url: this.restendpoint + action,
+                method: "GET",
+                params: data
+            }).then((res) => {
+                return res.data;
+            })
 
 
         }

@@ -21,7 +21,7 @@ routerApp.get('/check', (req,res)=>{
 routerApp.post('/login', (req, res) => {
 
     var userLoginData = {
-        username: req.body.username
+        ID: req.body.USERNAME
     }   
 
     userQuery.getLogin(userLoginData)
@@ -29,27 +29,28 @@ routerApp.post('/login', (req, res) => {
         .then(data => {
 
             if (data.length > 0) {
-
+              
                 var usrObj = data[0];
-
-                var passwordCheck = bcrypt.compareSync(req.body.password, usrObj.password);
-
+                /*console.log(req.body);
+                console.log(usrObj);*/
+                var passwordCheck = bcrypt.compareSync(req.body.PASSWORD, usrObj.PASSWORD);
+                
                 if (passwordCheck) {
-                    usrObj.password = null;
+                    usrObj.PASSWORD = null;
                     sess.loggedIn = true;
                     res.json({
                         status: 200, userdata: usrObj
                     });
                 } else {
                     res.json({
-                        status: 403,message:'please check username/password'
+                        status: 403,message:'please check userid/password'
                     });
                 }
 
 
             } else {
 
-                res.json({ status: 404 , message:'User (' +req.body.username + ') does not exist'});
+                res.json({ status: 404 , message:'User id (' +req.body.USERNAME + ') does not exist'});
 
             }
         })
@@ -85,6 +86,13 @@ routerApp.post('/addLogin', (req, res) => {
 
             }
         })
+
+})
+
+routerApp.get('/getSession', (req,res )=>{
+
+    console.log(sess);
+    res.json(sess);
 
 })
 

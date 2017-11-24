@@ -14,20 +14,35 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                     self.searching = false;
                     self.spinner = false;
                     self.loginObj = {
-                        username: '',
-                        userpassword: '',
+                        USERNAME: '',
+                        PASSWORD: '',
                         message: ''
                     }
 
                     self.btnText = "Login";
 
-                 /*   var user_cookie = $cookies.get('m_userid');
+                    //getSession
 
-                    if (user_cookie != null) {
+                    serviceSession.GET(self.loginObj, 'getSession')
+                        .then((res) => {
 
-                        $state.go('profiles');
-                        return;
-                    }*/
+                            if (!_.isEmpty(res)) {
+                                $state.go('profiles');
+                                return;
+                            }
+
+                        }, (error) => {
+                            console.log(error);
+                        })
+
+
+                    /*   var user_cookie = $cookies.get('m_userid');
+   
+                       if (user_cookie != null) {
+   
+                           $state.go('profiles');
+                           return;
+                       }*/
                     /*if (session == "true") {
                      
                      $state.go('profiles');
@@ -41,12 +56,7 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                         self.btnText = "please wait...";
                         self.spinner = true;
 
-                        var formData = new FormData();
-                        formData.append('q', 'authenticate');
-                        formData.append("username", self.loginObj.username);
-                        formData.append("password", self.loginObj.password);
-
-                        var data = serviceSession.callRest(self.loginObj,'login');
+                        var data = serviceSession.POST(self.loginObj, 'login');
 
                         data.then(function (res) {
 
@@ -60,11 +70,11 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                                 //(obj, cookie_name, cookiesservice) {
                                 //_writeCookie_object(res.data.roles, 'roles', $cookies);
                                 //_writeCookie_object(res.data.userdata, 'userdata', $cookies);
-                           //     serviceSession.set_roles(res.data.roles);
+                                //     serviceSession.set_roles(res.data.roles);
 
-                             //   $cookies.put("m_userid", res.data.userid);
+                                //   $cookies.put("m_userid", res.data.userid);
 
-                                $state.go('profiles');
+                             //   $state.go('profiles');
                                 self.spinner = false;
                             }
                             console.log(res);
