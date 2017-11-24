@@ -26,8 +26,13 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                     serviceSession.GET(self.loginObj, 'getSession')
                         .then((res) => {
 
+
                             if (!_.isEmpty(res)) {
-                                $state.go('profiles');
+
+                                if (res.loggedIn){
+                                    $state.go('profiles');
+                                }
+                              
                                 return;
                             }
 
@@ -59,7 +64,7 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                         var data = serviceSession.POST(self.loginObj, 'login');
 
                         data.then(function (res) {
-
+console.log(res);
                             if (res.status > 200) {
 
                                 self.loginObj.message = res.message;
@@ -76,6 +81,7 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
 
                              //   $state.go('profiles');
                                 self.spinner = false;
+                                res
                             }
                             console.log(res);
                             self.spinner = false;
