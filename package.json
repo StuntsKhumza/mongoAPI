@@ -33,6 +33,7 @@
   "mongoConnectioString": "mongodb://127.0.0.1:27017/loginapp",
   "devDependencies": {
     "jasmine-node": "^1.14.5",
+    "nodemon": "^1.12.1",
     "request": "^2.83.0"
   }
 }

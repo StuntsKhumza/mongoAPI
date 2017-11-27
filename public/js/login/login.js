@@ -12,7 +12,7 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                     var self = this;
 
                     self.searching = false;
-                    self.spinner = false;
+                    self.spinner = true;
                     self.loginObj = {
                         USERNAME: '',
                         PASSWORD: '',
@@ -22,10 +22,9 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                     self.btnText = "Login";
 
                     //getSession
-
                     serviceSession.GET(self.loginObj, 'getSession')
-                        .then((res) => {
-
+                    
+                        .then((res) => {                           
 
                             if (!_.isEmpty(res)) {
 
@@ -36,7 +35,10 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                                 return;
                             }
 
+                            self.spinner = false;
+
                         }, (error) => {
+                           
                             console.log(error);
                         })
 
@@ -55,16 +57,14 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                      }*/
 
                     self.login = function () {
-                        //    $state.go('profiles');       
-                        //   return;
-                        //self.searching = true;
+                        
                         self.btnText = "please wait...";
                         self.spinner = true;
 
                         var data = serviceSession.POST(self.loginObj, 'login');
 
                         data.then(function (res) {
-console.log(res);
+
                             if (res.status > 200) {
 
                                 self.loginObj.message = res.message;
@@ -78,17 +78,16 @@ console.log(res);
                                 //     serviceSession.set_roles(res.data.roles);
 
                                 //   $cookies.put("m_userid", res.data.userid);
-
-                             //   $state.go('profiles');
+                                
+                                $state.go('profiles');
                                 self.spinner = false;
-                                res
+                                
                             }
-                            console.log(res);
+                            
                             self.spinner = false;
                             self.searching = false;
 
                         });
-
 
                     }
 

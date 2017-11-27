@@ -7,36 +7,38 @@ angular.module('nav-app', ['ngCookies'])
             scope: {
                 username: '=',
                 linksObj: '=',
-                roles:'=',
-                bttsetting : '='
+                roles: '=',
+                bttsetting: '='
             }
             ,
-            controller: function ($state, $http, $cookies) {
+            controller: function ($state, $http, $cookies, serviceSession) {
 
                 var self = this;
                 self.userName = "";
                 self.spinner = true;
+
                 loadUsername();
 
                 function loadUsername() {
-                    var cookie = _getCookie('userdata', $cookies);
-                    if (cookie === null) {
-                        $http.get('php/service.php?q=getUserName')
-                            .then(function (response) {
-                                self.userName = response.data.username;
-                                self.spinner = false;
-                            })
+                   
+                    $http.get('/getSession')
 
-                    } else {
+                        .then(function (response) {
 
-                        self.userName = cookie.name;
-                                self.spinner = false;
+                            if (!_.isEmpty(response.data)) {
+                                
+                                self.userName = response.data.userdata.NAME;
 
-                    }
+                            } else {
+                                 $state.go('login');
+                            }
+
+                            self.spinner = false;
+                        })
 
                 }
 
-                self.goHome = function(){
+                self.goHome = function () {
                     $state.go('profiles');
                 }
 

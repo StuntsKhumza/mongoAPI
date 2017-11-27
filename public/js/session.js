@@ -4,6 +4,7 @@ angular.module('session-app', ['ngCookies'])
         // this.uploadUrl = "php/service_secured.php";
         this.restendpoint = "/";
         this.roles = "";
+        this.userOBject = {};
 
         this.getSession = function () {
             var call = $http.get('php/service.php?q=getSession');
@@ -53,7 +54,7 @@ angular.module('session-app', ['ngCookies'])
             return $http.post(this.restendpoint + action, data).
 
                 then(function (res) {
-                    console.log(res.data);
+                    
                     return res.data;
 
                 })

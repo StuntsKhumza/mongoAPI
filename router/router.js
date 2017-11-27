@@ -31,13 +31,14 @@ routerApp.post('/login', (req, res) => {
             if (data.length > 0) {
               
                 var usrObj = data[0];
-                /*console.log(req.body);
-                console.log(usrObj);*/
+                
                 var passwordCheck = bcrypt.compareSync(req.body.PASSWORD, usrObj.PASSWORD);
                 
                 if (passwordCheck) {
                     usrObj.PASSWORD = null;
                     sess.loggedIn = true;
+                    sess.userdata = usrObj;
+                   
                     res.json({
                         status: 200, userdata: usrObj
                     });
@@ -90,6 +91,7 @@ routerApp.post('/addLogin', (req, res) => {
 
 routerApp.get('/getSession', (req,res )=>{
 
+    console.log("Current Session:");
     console.log(sess);
     res.json(sess);
 

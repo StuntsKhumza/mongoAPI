@@ -15,20 +15,19 @@ angular.module('profiles-app', [
                 controllerAs: 'profilesController',
                 templateUrl: "js/profiles/profiles.html",
                 url: '/profiles',
-                controller: function ($scope, $state, $http, $anchorScroll, serviceSession, $cookies, getActiveSession) {
+                controller: function ($scope, $state, $http, $anchorScroll, serviceSession, $cookies) {
 
 
-                    if (getActiveSession.data.status == "false") {
+                  /*  if (getActiveSession.data.status == "false") {
                         $state.go("login");
                         return;
-                    }
+                    } */
 
                     var self = this;
                     self.testF = {}
                     self.activeuser = "";
                     self.activeuser_firstname = "";
                     self.spinner = true;
-
 
                     $scope.selectedForQ = {
                         patient: "",
@@ -51,13 +50,12 @@ angular.module('profiles-app', [
                         }
                     }
 
-                    self.userRoles = serviceSession.get_roles();
+                   /* self.userRoles = serviceSession.get_roles();
 
                     self.access = {
                         admin: isMember('[admin]', self.userRoles),
                         doctor: isMember('[doctor]', self.userRoles),
                         reception: isMember('[reception]', self.userRoles)
-
                     }
 
                     loadDoctors();
@@ -180,7 +178,7 @@ angular.module('profiles-app', [
                         $scope.userObj.clientSet = false;
                         $scope.userObj.client = null;
 
-                    };
+                    };*/
 
                 }/*,
                 resolve: {
