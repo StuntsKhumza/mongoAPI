@@ -4,7 +4,7 @@ angular.module('session-app', ['ngCookies'])
         // this.uploadUrl = "php/service_secured.php";
         this.restendpoint = "/";
         this.roles = "";
-        this.userOBject = {};
+        this.userOBject = [];
 
         this.getSession = function () {
             var call = $http.get('php/service.php?q=getSession');
@@ -15,18 +15,32 @@ angular.module('session-app', ['ngCookies'])
 
         };
 
+
+
         this.get_roles = function () {
 
             //check if roles were set
+            if (this.userOBject.length == 0) {
+                return;
+            }
 
-            if (this.roles.length === 0) {
+            if (this.roles.length == 0) {
+                
+                this.roles = this.userOBject.userdata.ROLES;
 
-                var d = _getCookie('roles', $cookies);
-
-                return d;
+                return this.roles;
             }
 
             return this.roles;
+        }
+
+        this.set_userobj = function (data) {
+            this.userOBject = data;
+        }
+
+
+        this.get_userobj = function () {
+            return this.userOBject;
         }
 
         this.set_roles = function (data) {
@@ -54,7 +68,7 @@ angular.module('session-app', ['ngCookies'])
             return $http.post(this.restendpoint + action, data).
 
                 then(function (res) {
-                    
+
                     return res.data;
 
                 })

@@ -16,7 +16,8 @@ var userSchema = new Schema({
     SURNAME: String,
     TYPE: String,
     SPECIALITY: String,
-    NAME: String
+    NAME: String,
+    ROLES: []
 })
 
 var users = mongoose.model('users', userSchema);
