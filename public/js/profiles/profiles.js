@@ -6,7 +6,7 @@ angular.module('profiles-app', [
     'session-app',
     'ngCookies',
     'nav-app',
-    'waitingList-app', "myQ-app","ngSearch-app",
+    'waitingList-app', "myQ-app", "ngSearch-app",
 ])
     .config(function ($stateProvider, $urlRouterProvider) {
 
@@ -16,12 +16,6 @@ angular.module('profiles-app', [
                 templateUrl: "js/profiles/profiles.html",
                 url: '/profiles',
                 controller: function ($scope, $state, $http, $anchorScroll, serviceSession, $cookies) {
-
-
-                  /*  if (getActiveSession.data.status == "false") {
-                        $state.go("login");
-                        return;
-                    } */
 
                     var self = this;
                     self.testF = {}
@@ -50,7 +44,7 @@ angular.module('profiles-app', [
                         }
                     }
 
-                   /* self.userRoles = serviceSession.get_roles();
+                    self.userRoles = serviceSession.get_roles();
 
                     self.access = {
                         admin: isMember('[admin]', self.userRoles),
@@ -58,26 +52,11 @@ angular.module('profiles-app', [
                         reception: isMember('[reception]', self.userRoles)
                     }
 
-                    loadDoctors();
+                    return;
 
-                    $scope.queue = {
-                        obj: []
-
-                    };
-
-           
-
-                    var call = serviceSession.get_roles();
-
-                    var user_cookie = $cookies.get('m_userid');
-
-                    if (user_cookie === null) {
-
-                        $http.get('php/service.php?q=logOff');
-
-                        $state.go('login');
-                        return;
-                    }
+                    /*
+                                        loadDoctors();
+                    */
 
 
                     self.assignToDr = function (ID) {
@@ -134,7 +113,7 @@ angular.module('profiles-app', [
 
                     }
 
-                    self.loadWaitingList();
+                    //    self.loadWaitingList();
 
                     function loadDoctors() {
                         //getUsersByType
@@ -178,7 +157,7 @@ angular.module('profiles-app', [
                         $scope.userObj.clientSet = false;
                         $scope.userObj.client = null;
 
-                    };*/
+                    };
 
                 }/*,
                 resolve: {

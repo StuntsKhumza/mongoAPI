@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-var router = require('./router/router.js');
+var router = require('./router/route-users');
 var bodyParser = require("body-parser");
 var packagejson = require("./package.json");
 var logger = require("morgan");
@@ -64,6 +64,8 @@ app.post('/login', router);
 app.get('/check', router);
 app.get('/getSession', router);
 app.post('/addLogin', router);
+app.post('/updateLogin', router);
+//
 
 app.listen(packagejson.port, ()=>{
     console.log('Server up on http://localhost:' + packagejson.port);

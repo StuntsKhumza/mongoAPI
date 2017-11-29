@@ -29,6 +29,9 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
                             if (!_.isEmpty(res)) {
 
                                 if (res.loggedIn){
+
+                                    serviceSession.set_userobj(res);
+
                                     $state.go('profiles');
                                 }
                               
@@ -65,6 +68,8 @@ angular.module('login-app', ['ui.router', 'session-app', 'ngCookies'])
 
                         data.then(function (res) {
 
+                            serviceSession.set_userobj(res);
+                            
                             if (res.status > 200) {
 
                                 self.loginObj.message = res.message;
